@@ -1,0 +1,175 @@
+---
+#########################################
+# options for knitting a single chapter #
+#########################################
+output:
+  bookdown::pdf_document2:
+    template: templates/brief_template.tex
+    citation_package: biblatex
+  bookdown::html_document2: default
+  bookdown::word_document2: default
+documentclass: book
+#bibliography: [bibliography/references.bib, bibliography/additional-references.bib]
+---
+
+# Results 
+
+## Participants 
+
+The database contained 569,046 initial prescriptions of direct oral anticoagulants (DOACs) or vitamin K antagonists (VKAs), with patients having multiple records if they had multiple prescriptions of a treatment or were prescribed different treatments during the study period.
+
+Of these, 442,967 (77.8%) records were assessed for eligibility, and 51,520 (9.1%) distinct participants with a diagnosis of NVAF and prescription of apixaban or warfarin between January 1, 2013, to July 31, 2019, were eligible for the study. There were 27,628 apixaban users and 23,892 warfarin users. Figure.\@ref(fig:flowchart) shows the flow of participants selection in the study. 
+
+
+```{r flowchart, echo=FALSE, fig.cap="Flowchart of participants in the study", message=FALSE, warning=FALSE, , fig.align='center', out.width='105%',fig.pos = "h"}
+
+knitr::include_graphics("figures/flow.dig.png")
+```
+
+
+Table.\@ref(tab:tab1) shows the baseline characteristics of the study population by exposure. In general, patients on apixaban had a median age at entry of 78 years (interquartile range (IQR): 70, 84) compared to 77 years (70, 82) in warfarin patients. Apixaban patients were more likely to be ≥ 75 years (62% vs. 60%) and females (48% vs. 45%) than those on warfarin. The two groups had highly similar median BMI, breakdown of BMI categories, and multiple deprivation indices. The majority (>95%) were of white ethnicity with a similar distribution of other ethnic groups. On average, the apixaban group included more non-smokers and non-alcohol drinkers than warfarin. 
+
+Regarding prognostic factors, apixaban users had a higher CHADS~2~ score compared to warfarin users, with more people having a history of stroke, transient ischemic attack, or systemic embolism (25% compared to 20%) but were less likely to report other vascular diseases. Other comorbidities were comparable between the two groups. 
+
+Concomitant use of medications was similar between the groups in general, but warfarin users had a higher proportion of ACE inhibitors or ARBs users (56% versus 51%) and aspirin (14% versus 7%) compared to apixaban users. 
+
+Variables with more than 1% missing data were alcohol (5.5%), BMI (3%), kidney function (2%), and ethnicity (1.2%). Patients with missing data were, on average, of older age, less deprived, and came from less deprived practices compared to those with no missing data, see Table.\@ref(tab:supptable3). 
+
+Total follow-up in the cohort for the primary effectiveness outcome was 44,323 person-years (median 1.53 years; IQR: 0.69, 2.61) in the apixaban arm and 76,950 person-years (median 4 years; IQR: 2.38, 5) in the warfarin arm. For the primary safety outcome, the total follow-up was 39,898 person-years (median 1.31 years; IQR: 0.53, 2.40) in the apixaban arm and 74,947 person-years (median 3.88 years; IQR: 2.21, 5) in the warfarin arm. For warfarin, time in the therapeutic range (defined as the proportion of time in which INR was within the target range 2.0-3.0) had a mean (standard deviation) of 0.70 (0.19) and a median (IQR) of 0.74 (0.62, 0.83). 
+
+\renewcommand{\arraystretch}{1.3}
+
+
+```{r include=FALSE}
+library(readxl)
+library(kableExtra)
+
+table_base <- read_excel("/Users/turkimohammed/Desktop/Study/Summer_Project/Summer_project_Turki_draft/Summer_project_Turki_draft/docs/tab_base.xlsx",col_types = "text")
+options(knitr.kable.NA = '')
+table_baseline <- kable(table_base,booktabs = TRUE, longtable = T, caption = 'Baseline characteristics of study participants by treatment group', label= "tab1",align = "lcc", escape = FALSE,
+  linesep = "\\addlinespace") %>%  kable_styling(latex_options	= c("scale_down","striped","repeat_header","hold_position"), repeat_header_method = "replace") %>%
+  group_rows("Age groups at entry \\\\break \\\\normalfont{(years)- N (\\\\%)}", start_row = 4, end_row = 8, escape = F) %>% 
+  group_rows("BMI groups \\\\normalfont{kg/m\\\\textsuperscript{2} - N (\\\\%)}", start_row = 12, end_row = 18, escape = F) %>% 
+  group_rows("Individual-level IMD(2015)\\\\textsuperscript{a}\\\\normalfont{- N (\\\\%)}", start_row = 19, end_row = 24,escape = F) %>% 
+  group_rows("Practice-level IMD(2015)\\\\textsuperscript{a}\\\\normalfont{- N (\\\\%)}", start_row = 25, end_row = 29, escape = F) %>% 
+  group_rows("Ethnicity\\\\normalfont{- N(\\\\%)}", start_row = 30, end_row = 36, escape = F)  %>% 
+  group_rows("Smoking status", start_row = 38, end_row = 41) %>% 
+  group_rows("Alcohol consumption", start_row = 42, end_row = 46) %>%  group_rows("CHADS\\\\textsubscript{2} components", start_row = 48, end_row = 52, escape = F) %>%  group_rows("CHADS\\\\textsubscript{2} components", start_row = 53, end_row = 59, escape = F) %>%  group_rows("Additional CHA\\\\textsubscript{2}DS\\\\textsubscript{2}-VASc score components", start_row = 60, end_row = 63, escape = F)  %>%  group_rows("Renal function", start_row = 67, end_row = 71)  %>%  group_rows("Charlson comorbidity index components", start_row = 74, end_row = 80)  %>%  group_rows("Concomitant medications at index date \\\\normalfont{- N (\\\\%)}", start_row = 81, end_row = 90, escape = F)  %>%  group_rows("Apixaban dose\\\\normalfont{- N (\\\\%)}", start_row = 91, end_row = 93, escape = F)  
+
+
+
+
+#table_baseline <- regulartable(table_base, cwidth = 1.2)
+
+```
+
+```{r tab1,echo=FALSE, ft.align="center", tab.cap='Baseline characteristics of study participants by treatment group', tab.id='tab1', label='tab1'}
+
+table_baseline  %>% column_spec(1, width = "16em") %>% column_spec(c(2,3), width = "8em", bold = F) %>% footnote("\\\\textbf{ACE inhibitors or ARBs:} Angiotensin-converting enzyme inhibitors and angiotensin II receptor blockers; \\\\textbf{BMI:} Body mass Index; \\\\textbf{CHADS\\\\textsubscript{2} score:} calculated as 1 for each component expect for age ≥ 75 and history of stroke counted as 2; \\\\textbf{COPD:} Chronic obstructive pulmonary disease;\\\\textbf{IMD(2015):} Index of Multiple Deprivation 2015; \\\\textbf{IQR:} Interquartile range;  \\\\textbf{NSAIDs:} Non-steroidal anti-inflammatory drugs; \\\\textbf{SE:} Systemic embolism; \\\\textbf{TIA:} Transient ischemic attack", threeparttable= T, escape = F,general_title= "")
+```
+
+
+
+
+## Proportional hazard assumption 
+Visual examination of Nelson–Aalen graphs and formal tests of interaction for treatments with time did not indicate violations of proportional hazards assumption except for systemic embolism (SE). For SE, the formal test showed increasing evidence against the null (*p*:0.085), with the visual examination also suggesting non-proportionality, but both procedures were based on very few events, see Appendix.\@ref(appendix-d).  
+
+\vspace{7ex}
+\vskip 7pt 
+
+## Effectiveness 
+
+- \large \textbf{Primary outcome:}
+
+\vspace{-3ex}
+\vskip -3pt
+
+### Stroke/systemic embolism  
+
+During follow-up period, the primary composite outcome occurred (apixaban versus warfarin) in 4.6% (303/6,573) versus 6.4% (330/5,147) of normal weight, 3.5% (327/9,263) compared to 5.5% (446/8,079) of overweight and 2.8% (267/9,426) versus 4.8% (410/8,562) of obese	patients. In general, the rate of events seemed to decline in higher BMI groups (Figure.\@ref(fig:sse)).
+
+Figure.\@ref(fig:sse) summarizes the results of stroke/SE in apixaban compared to warfarin. In the minimally adjusted model, which included age as time scale, apixaban was inferior (i.e. the upper 95% CI limit ≥1.38) in normal weight (hazard ratio (HR): 1.30; 95% CI: 1.11, 1.50; *p*:0.002) and overweight (HR: 1.25; 95% CI: 1.08, 1.43; *p*:<0.001) groups but not in the obese group (HR: 1.15; 95% CI: 0.99, 1.34; *p*:0.071). The results did not show evidence of statistical interaction (interaction-*p*: 0.539). 
+
+However, in the fully adjusted model (using age as a time scale and including confounders in DAGs), apixaban was non-inferior in all groups of BMI. HRs were 1.11 (95% CI: 0.93, 1.32; *p*:0.257) in the normal weight group, 1.06 (95% CI: 0.90, 1.25; *p*:0.459) in the overweight group and 0.98 (95% CI: 0.83, 1.17; *p*:0.857) in the obese group with no evidence of statistical interaction (interaction-*p*: 0.563).
+
+
+- \large \textbf{Secondary outcomes:}
+
+Figure.\@ref(fig:allstrokese) summarizes the effectiveness results of stroke (any type), ischemic stroke, hemorrhagic stroke, and SE outcomes in apixaban compared to warfarin across different BMI groups.
+
+```{r sse, echo=FALSE,fig.margin= FALSE, fig.cap="Comparative effectiveness of stroke/SE in apixaban versus warfarin", message=FALSE, warning=FALSE, , fig.align='center', out.width='107%',fig.pos = "H", out.height = '40%',}
+knitr::include_graphics("figures/sse_results.png")
+```
+
+### Stroke (any type)
+
+In the minimally adjusted model, apixaban was inferior to warfarin in normal weight (HR: 1.30; 95% CI: 1.11, 1.52; *p*:0.001), overweight (HR: 1.37; 95% CI: 1.18, 1.59; *p*:<0.001) and obese (HR: 1.18; 95% CI: 1.01, 1.39; *p*:0.040) groups with no evidence of statistical interaction (interaction-*p*: 0.433).
+
+In the fully adjusted model, all groups demonstrated non-inferiority of apixaban to warfarin with a HR in the normal weight group of 1.09 (95% CI: 0.91, 1.32; *p*:0.349), a HR in the overweight group of 1.15 (95% CI: 0.97, 1.37; *p*:0.911) and a HR in the obese group of 0.99 (95% CI: 0.82, 1.19; *p*:0.857) but without evidence of interaction (interaction-*p*: 0.405). 
+
+### Ischemic stroke
+
+In both minimally and fully adjusted models, apixaban was inferior to warfarin in time to ischemic stroke with some heterogeneity in average treatment effect but with wide 95% CIs and no evidence of statistical interaction (interaction-*p*: minimally adjusted: 0.463 and fully adjusted: 0.368). 
+
+The minimally adjusted HRs were 1.39 (95% CI: 1.16, 1.67; *p*:<0.001) in the normal weight group, 1.52 (95% CI: 1.28, 1.80; *p*:<0.001) in the overweight group and 1.30 (95% CI: 1.08, 1.56; *p*:0.006) in the obese group. The fully adjusted HRs were 1.23 (95% CI: 0.99, 1.52; *p*:0.062) in normal weight, 1.38 (95% CI: 1.13, 1.68; *p*:0.002) in overweight and 1.15 (95% CI: 0.93, 1.42; *p*:0.193) in obese patients. 
+
+### Hemorrhagic stroke
+
+In the minimally adjusted model, apixaban was non-inferior to warfarin in the overweight (HR: 0.94; 95% CI: 0.70, 1.26; *p*:0.656) and obese (HR: 0.82; 95% CI: 0.59, 1.14; *p*:0.247) patients but not in those with normal weight (HR: 1.07; 95% CI: 0.79, 1.45; *p*:0.659). The results also showed no evidence of statistical interaction (interaction-*p*: 0.513). 
+
+After adjusting for confounders, apixaban was superior to warfarin in the overweight (HR: 0.61; 95% CI: 0.43, 0.86; *p*:0.005) and obese (HR: 0.56; 95% CI: 0.39, 0.81; *p*:0.002) groups with strong evidence against the null and non-inferior in the normal weight group (HR: 0.75; 95% CI: 0.52, 1.08; *p*:0.118) but did not result in statistical interaction (interaction-*p*: 0.437).
+
+
+### Systemic embolism (SE) 
+
+In the minimally adjusted model, apixaban showed, compared to warfarin, inferiority in the normal weight group (HR: 1.20; 95% CI: 0.77, 1.88; *p*:0.428), non-inferiority in obese group (HR: 0.89; 95% CI: 0.57, 1.40; *p*:0.606) and superiority in the overweight group (HR: 0.58; 95% CI: 0.37, 0.93; *p*:0.023). The results showed increasing evidence of statistical interaction (interaction-*p*: 0.085). 
+
+In the fully adjusted model, results did not meaningfully change with the same overall conclusions as in the minimally adjusted model with increasing evidence of statistical interaction (interaction-*p*: 0.047). Adjusted HRs were 1.14 (95% CI: 0.67, 1.95; *p*:0.628) in the normal weight patients, 0.51 (95% CI: 0.29, 0.88; *p*:0.015) in the overweight patients and 0.91 (95% CI: 0.54, 1.53; *p*:0.715) in the obese patients.
+
+
+\vspace{-5ex}
+\vskip -5pt
+```{r allstrokese, echo=FALSE, fig.cap="Comparative effectiveness of stroke (any type), ischemic stroke, hemorrhagic stroke, and SE in apixaban versus warfarin", message=FALSE, warning=FALSE, out.width='105%',fig.pos = "H", out.height='95%'}
+knitr::include_graphics("figures/stroke_sys_results.png")
+```
+
+### All-cause mortality
+
+Figure.\@ref(fig:allmort) shows stratum-specific hazard ratios of all-cause mortality in apixaban compared to warfarin across different BMI groups. 
+
+In the minimally adjusted model, apixaban, compared to warfarin, showed an increased hazard of death from any cause across all BMI groups, but there was no evidence of statistical interaction (interaction-*p*: 0.487). The HRs were 1.24 (95% CI: 1.16, 1.32; *p*:<0.001) in normal weight, 1.23 (95% CI: 1.15, 1.32; *p*:<0.001) in overweight and 1.17 (95% CI: 1.09, 1.26; *p*:<0.001) in obese groups.
+
+After adjusting for confounding depicted in DAG, apixaban was not different from warfarin in terms of death from any cause and also did not show evidence of statistical interaction (interaction-*p*: 0.290). Adjusted HR in the normal weight group was 1.05 (95% CI: 0.97, 1.14; *p*:0.235), in the overweight group was 1.06 (95% CI: 0.98, 1.14; *p*:0.176) and in the obese group was 0.98 (95% CI: 0.90, 1.06; *p*:0.641).
+
+
+```{r allmort, echo=FALSE, fig.cap="Comparative effectiveness of all-cause mortality in apixaban versus warfarin", message=FALSE, warning=FALSE , fig.align='center', out.width='107%',fig.pos = "h", out.height = '40%'}
+knitr::include_graphics("figures/all_mort_results.png")
+```
+
+## Safety 
+
+### Major bleeding 
+
+During follow-up period, the primary safety outcome occurred (apixaban versus warfarin) in 3.7% (246/6,573) versus 9.1% (467/5,147) of normal weight, 3.3% (309/9,263) compared to 8.9% (715/8,079) of overweight and 3.8% (353/9,426) versus 9.5% (815/8,562) of obese	patients. 
+
+Figure.\@ref(fig:majorbleed) shows stratum-specific hazard ratios of major bleeding in apixaban compared to warfarin across different BMI groups. In the minimally adjusted model, apixaban, compared to warfarin, was superior in major bleeding across all BMI groups, but there was no evidence of interaction (interaction-*p*: 0.666). The HR was 0.85 (95% CI: 0.73, 0.98; *p*:0.029) in normal weight group, 0.80 (95% CI: 0.70, 0.91; *p*:<0.001) in the overweight group and 0.87 (95% CI: 0.77, 0.98; *p*:0.023) in the obese group.
+
+When controlled for confounding, apixaban was superior to warfarin with stronger association and strength of evidence. Adjusted HR in the normal weight group was 0.79 (95% CI: 0.67, 0.94; *p*:0.008), in the overweight group was 0.75 (95% CI: 0.64, 0.87; *p*:<0.001) and in the obese group was 0.79 (95% CI: 0.68, 0.91; *p*:<0.001). The results did not show evidence of interaction (interaction-*p*: 0.797). 
+
+
+```{r majorbleed, echo=FALSE, fig.cap="Comparative safety of major bleeding in apixaban versus warfarin", message=FALSE, warning=FALSE, , fig.align='center', out.width='107%',fig.pos = "H", out.height = '40%'}
+knitr::include_graphics("figures/bleed_results.png")
+```
+
+
+## Sensitivity analyses 
+
+Overall, sensitivity analyses were consistent with the main analysis and did not find statistical interaction. When restricting the analysis to participants with BMI observations within the three years prior to the index date, the results did not differ meaningfully from the main analysis except for SE, in which no evidence of interaction was found in both minimally adjusted and fully adjusted models. The results, however, had wider CIs due to fewer participants in the analysis, see Appendix.\@ref(appendix-e). The results from the model with BMI as a linear term did not show evidence of effect modification in both stroke/SE (interaction *p*: 0.504) and major bleeding (interaction *p*: 0.991) with the increase in HR for each unit of BMI in both outcomes centered at 1. In the analysis using the NICE BMI categories, the results did not largely deviate from the main analysis, but extreme groups had very wide 95% CIs, see Appendix.\@ref(appendix-f).
+
+## Additional analyses 
+
+Results of the ratios of hazard ratios can be found in Appendix.\@ref(appendix-g). Overall, the results did not suggest any evidence of multiplicative effect modification, with their 95% CIs centered around the no difference value. 
+
+Details of quantitative bias analysis can be found in Appendix.\@ref(appendix-h). Generally, I found that an unmeasured confounder with a moderate association (risk ratio 1.77-2.16) with both the exposure and the outcome can explain the deviation from ARISTOTLE results for stroke/SE. On the other hand, a relatively weaker confounder would be needed to explain the non-inferiority. Also, a moderate unmeasured confounder could have driven the major bleeding estimate to the null and the lower limit of the 95% CI for the ratio of hazard ratios to a non-null value. 
+
+Results of propensity score models did not deviate from the main analysis with highly comparable estimates, but CIs in the fully adjusted models additionally including propensity scores were slightly narrower (Appendix.\@ref(appendix-i)). 

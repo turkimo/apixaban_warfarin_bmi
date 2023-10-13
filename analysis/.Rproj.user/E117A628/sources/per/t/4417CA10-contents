@@ -1,0 +1,79 @@
+---
+title: "this should be the title of the paper"
+author: "Turki Bin Hammad"
+date: "3/10/2023"
+output:
+  # bookdown::word_document2: default
+    bookdown::pdf_document2:
+    #template: templates/brief_template.tex
+    #citation_package: biblatex
+  #bookdown::html_document2: default
+# documentclass: book
+
+ bibliography: [~/Documents/GitHub/apixaban_warfarin_obese/paper/bibilography/apixaban_warfarin_bmi.bib]
+ csl: bibliography/american-medical-association.csl
+---
+
+Atrial fibrillation (AF) is a disease of irregular heart rhythm and the most common form of arrhythmias leading to increased risk of cardiovascular morbidity, stroke in particular, and mortality^[@benjaminImpactAtrialFibrillation1998; @wolfAtrialFibrillationIndependent1991; @odutayoAtrialFibrillationRisks2016]^. Multiple risk factors demonstrated an association with increased risk of AF, including aging, obesity, diabetes, hypertension, valvular heart disease, coronary heart disease, and congestive heart failure^[@benjaminIndependentRiskFactors1994; @rangnekarCharacterisationRiskFactors2015; @lauModifiableRiskFactors2017]^.
+
+AF affects approximately 46.3 million people around the world^[@benjaminHeartDiseaseStroke2019]^. In England, disease prevalence is estimated at 2.5% (95% confidence interval (CI): 2.4,2.6), with around 1.5 million diagnosed patients^[@publichealthenglandAtrialFibrillationPrevalence]^. From 1998 to 2017, the age-standardized rates increased by 30%, and the absolute number of cases increased by 72% in the country^[@wuTemporalTrendsPatterns2022]^. 
+
+The disease has two main etiological classifications 1) valvular in patients with evidence of moderate to severe mitral stenosis or mechanical heart valve and 2) non-valvular in patients without these symptoms. AF can also be sustained for different periods, including paroxysmal (≤7 days), persistent (>7 days), long-standing persistent (>12 months), or permanent sustained when restoration of heart rhythm is no longer feasible^[@january2014AHAACC2014]^.
+
+
+Non-valvular AF patients who are at increased risk of stroke are recommended to start anticoagulation therapy to mitigate the risk. In clinical practice, the risk of stroke in NVAF patients is assessed using CHA\textsubscript{2}DS\textsubscript{2}-VASc^[@gageValidationClinicalClassification2001; @lipRefiningClinicalRisk2010]^ which consists of congestive heart failure, hypertension, age ≥75, diabetes mellitus, prior stroke, vascular disease, age 65 to 74, and being female. The presence of each component constitutes one point apart from being ≥75 years old and having history of stroke which each counted as two points^[@lipRefiningClinicalRisk2010]^. The current recommendation by the National Institute for Health & Care Excellence (NICE) suggests starting anticoagulation in NVAF patients when their CHA\textsubscript{2}DS\textsubscript{2}-VASc score is ≥2^[@ScenarioManagementAF]^. 
+
+Warfarin, a vitamin K antagonist (VKA), is an effective anticoagulant used across multiple cardiovascular diseases^[@electronicmedicinescompendiumWarfarin5mgTablets]^.
+In NVAF, warfarin was the first line anticoagulant for a long period of time, showing a reduction of 62% (95% CI: 48%, 72%) in the relative risk of stroke events compared to placebo^[@hartAntithromboticTherapyPrevent1999]^.
+The drug, however, has multiple food and drug interactions and requires close monitoring and dose adjustments to avoid bleeding or lack of efficacy because of its narrow therapeutic index^[@holbrookSystematicOverviewWarfarin2005; @hirshOralAnticoagulantsMechanism1998]^.
+
+In 2011, apixaban, a direct oral anticoagulant (DOAC), was compared to warfarin in the Apixaban for Reduction in Stroke and Other Thromboembolic Events in Atrial Fibrillation (ARISTOTLE) trial. Apixaban was superior to warfarin in reducing the risk of stroke, systemic embolism, and risk of bleeding, which led to changes in the clinical practice of anticoagulation therapy^[@grangerApixabanWarfarinPatients2011;@ApixabanBNFCode; @WarfarinSodiumBNF]^. 
+
+
+
+### Randomized controlled trials and observational studies
+
+Randomized controlled trials (RCTs) are the gold standard for comparative treatment effects research. Nevertheless, they are usually conducted at a high cost limiting their size, duration of follow-up, and representation of important subpopulations^[@silvermanRandomizedControlledTrials2009]^.
+
+Analysis of observational data from electronic health records (EHRs) enables researchers to overcome these issues but comes at the expense of estimating treatment effects in the absence of randomization.
+The lack of random assignment renders any observed associations in the data prone to confounding bias due to differences in baseline prognostic factors^[@rubinDesignAnalysisObservational2007]^.
+
+Although some of the confounding effects can be accounted for, in part, through statistical techniques such as standardization, stratification, and regression analysis, these methods can only account for variables that are known and recorded in the study. Unmeasured confounding, on the other hand, can still distort the observed association leading to biased estimates of causal treatment effects^[@vanderweeleUnmeasuredConfoundingGeneral2011]^.
+
+One way to improve the validity of inferences from observational data is to benchmark or validate an observational study against an existing RCT.
+That is, to design an observational study that mirrors the reference RCT in terms of design, eligibility criteria, and statistical analysis and then compare the results from the two studies^[@dahabrehBenchmarkingObservationalMethods2020; @wingRealWorldEffects2021]^.
+If the results are comparable, one can have more trust in findings from observational analysis and use the data further to explore the effects in under-represented populations in the reference RCT while leveraging the advantages of observational data (e.g., extended follow-up and the larger pool of patients).
+
+Recently, Powell *et al.*(2021,2022) successfully replicated the results of the ARISTOTLE trial using a trial-analogous cohort of NVAF patients from the Clinical Practice Research Datalink (CPRD) data linked to Hospital Episodes Statistics (HES) and Office for National Statistics (ONS) databases in the United Kingdom^[@powellRealworldEffectsMedications2021;@powelleCanWeReplicate]^. This provided the basis for further investigation of treatment effects in important subgroups using the same observational data.
+
+
+### Study rationale
+
+Obesity is increasing at unprecedented rates worldwide, with around 1.9 billion adults being overweight or obese, according to the World Health Organization (WHO)^[@worldhealthorganizationwhoObesityOverweight]^. In England, two-thirds of adult men and women are overweight or obese^[@alisonneaveHealthSurveyEngland]^.
+This increase is expected to be accompanied by a rise in NVAF cases over the years, as obesity is an established risk factor for NVAF and can affect other risk factors of the disease (e.g., hypertension and diabetes)^[@lavieObesityAtrialFibrillation2017]^.
+
+In addition, obesity is expected to play a role in the effectiveness and safety of both apixaban and warfarin. For example, warfarin is a highly lipophilic drug with around 99% of the drug binding to plasma proteins, while only the small unbounded fraction constitutes the active part of the efficacy and safety of the drug^[@DailyMedWARFARINSODIUM]^. This protein binding is known to be affected by changes triggered by obesity^[@blouinInfluenceObesityDrug1987]^. This, for example, could be the reason for longer required periods for obese patients to achieve the targeted international normalized ratio (INR), a measure of the time blood takes to clot, on warfarin^[@wallaceComparisonInitialWarfarin2013]^.  
+
+For apixaban, the drug is given in fixed doses of 2.5 mg (in underweight, ≥ 80 years old, or reduced kidney function) or 5mg, which may lead to sub-optimal dosing in the obese population compared to non-obese. The currently available data comes from two post-hoc analyses of the ARISTOTLE study, which compared the treatment to warfarin and one cohort study in the United States restricted to obese patients.
+The first post-hoc analysis of the ARISTOTLE trial indicated varying responses to the two treatments across different outcomes and body mass index (BMI) categories with diminished differences in efficacy between apixaban and warfarin and lower risk of outcomes in both arms with increased BMI^[@sandhuObesityParadoxAtrial2016]^. The second analysis used body weights (≤60 kg, 61-120 kg, >120 kg) rather than BMI but showed similar findings with varying point estimates across weight and attenuated differences between treatments with increased weight^[@hohnloserEfficacySafetyApixaban2019]^. However, the cohort study was restricted to obese patients and did not compare different BMI groups^[@deitelzweigEffectivenessSafetyOral2020]^.
+
+Although the post-hoc analyses did not find evidence of effect modification by obesity, the number of events was scarce across groups with very wide CIs and, therefore, might lack the power to detect clinically meaningful differences in treatment effects. Thus, observational analysis of EHRs could provide more robust evidence for this population^[@lipShortTermOutcomesApixaban2019]^. Understanding the role of obesity in the effectiveness and safety of the two anticoagulants will help healthcare professionals and patients make better evidence-based treatment decisions.  
+
+
+## Aim, objectives and estimands 
+
+### Aim
+
+This study aims to investigate whether obesity, using BMI as a proxy, is an effect modifier of the effectiveness and safety of apixaban versus warfarin in NVAF patients, similar to those included in the ARISTOTLE study.
+
+### Objectives
+
+The study objectives are:
+
+1.  To assess the effectiveness of apixaban compared to warfarin on time to stroke, systemic embolism, and death from any cause across different BMI categories.
+
+2.  To assess the safety of apixaban compared to warfarin on time to major bleeding across different BMI categories.
+
+### Estimands 
+
+

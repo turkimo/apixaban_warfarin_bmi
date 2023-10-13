@@ -1,0 +1,299 @@
+---
+#########################################
+# options for knitting a single chapter #
+#########################################
+output:
+  bookdown::pdf_document2:
+    template: templates/brief_template.tex
+    citation_package: biblatex
+  #bookdown::html_document2: default
+  #bookdown::word_document2: default
+documentclass: book
+bibliography: [bibliography/summer_project.bib]
+csl: bibliography/vancouver.csl
+---
+
+# Methods
+
+This study is reported according to the Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) Statement and its extension REporting of studies Conducted using Observational Routinely-collected Data for pharmacoepidemiology (RECORD-PE)^[@vonelmStrengtheningReportingObservational2007;@langanReportingStudiesConducted2018]^. 
+
+## Study design
+
+I carried out a cohort study using a target trial design to emulate a target trial highly similar to the ARISTOTLE study. Target trial design consists of two steps: 1) defining a protocol and analysis plan of the target trial that would have been
+conducted if it was feasible (i.e., eligibility criteria, treatment strategies, outcomes, start and end of follow-up, causal contrasts, statistical analysis); 2) emulating this target trial using the observational
+analysis apart from aspects that are limited by the nature of the data^[@hernanmaCausalInferenceWhat2020;@hernanUsingBigData2016]^.
+
+I estimated the average treatment effects of prescribing apixaban (5mg/2.5mg twice daily) compared to warfarin (targeting an INR of
+(2.0-3.0)) in NVAF patients on the time to stroke/systemic embolism (SE), mortality and major bleeding within strata of BMI groups.
+
+Figure.\@ref(fig:studyscheme) shows the timelines of data collection and was inspired by Schneeweiss *et al.*(2019)^[@schneeweissGraphicalDepictionLongitudinal2019]^.
+The study was approved by the MSc Research Ethics Committee (Ethics Ref: 27537)
+at the London School of Hygiene & Tropical Medicine and the Independent
+Scientific Advisory Committee for MHRA Database Research (approved amendment
+to 19\_066).
+
+
+
+```{r studyscheme, echo=FALSE, fig.cap="Study scheme and timelines", message=FALSE, warning=FALSE, , fig.align='center', out.width='100%',fig.pos = "H"}
+knitr::include_graphics("figures/study_scheme.png")
+```
+
+
+### The reference RCT: ARISTOTLE study^[@grangerApixabanWarfarinPatients2011]^
+
+  - **Study design**
+
+ARISTOTLE was a randomized, double-blind, double-dummy, active-controlled study that compared apixaban (5mg/2.5mg) to warfarin (targeting INR of 2.0 to 3.0) in AF patients from 19/12/2006 to 30/01/2011.
+
+Patients were $\geq$ 18 years, had permanent or persistent AF or atrial flutter on ECG at enrollment, had at least one additional risk factor for stroke assessed using CHADS~2~ score, agreed to use contraceptives (for women of childbearing age), and provided informed consent. Inclusion and exclusion criteria are detailed in Table.\@ref(tab:supptable1).
+
+The study's primary objective was to establish the non-inferiority of apixaban to warfarin in terms of the primary outcome of a composite of ischemic/hemorrhagic stroke or systemic embolism. The secondary objectives were establishing superiority for the primary outcome and for the rates of major bleeding and death from any cause.
+    
+  - **Study results**
+
+In 18,201 patients, the hazard ratio (HR) of apixaban compared to warfarin for the primary composite outcome was 0.79 (95% CI: 0.66, 0.95; *p*: <0.001 for non-inferiority; *p*: 0.01 for superiority).
+The HR for major bleeding was 0.69 (95% CI: 0.60, 0.80; *p*: <0.001) and for death from any cause 0.89 (95% CI: 0.80, 0.998; *p*: 0.047).
+
+### Target trial protocol
+
+The target trial would be a pragmatic randomized controlled trial closely mirroring the design and analysis of the ARISTOTLE study while considering the settings of the current study (i.e., the CPRD). 
+
+The study used the same eligibility criteria, treatment strategies, follow-up, and causal contrasts in ARISTOTLE. The main changes in the target trial were: 
+
+1) The trial would be an open-label pragmatic randomized controlled trial (i.e., it would not use a double-dummy design) since it is not feasible to emulate a placebo-controlled double-blind trial using observational data^[@hernanUsingBigData2016]^;
+
+2) The study duration would be from 01/01/2013 to 31/07/2019;
+
+3) It would be limited to patients registered for at least six months in a practice contributing research quality data to the CPRD Aurum  and having linkage to HES APC and ONS. A detailed comparison regarding eligibility criteria can be found in Table.\@ref(tab:supptable1);
+
+4) It would only include incident users of treatments.  
+
+5) Randomization would be stratified by BMI to have a more efficient stratified analysis. 
+
+6) It did not assess secondary outcomes such as myocardial infarction, any bleeding, other adverse events, or
+liver-function abnormalities. 
+
+### Observational cohort analysis
+
+I emulated the target trial using CPRD Aurum linked data with deviations such lack of informed consent and timeline of assessing baseline variables. Table.\@ref(tab:supptable1) highlights the differences between the target trial and the observational analysis. 
+
+## Data sources and measurements
+
+### Data sources
+
+- **Clinical Practice Research Datalink Aurum (CPRD Aurum):**
+
+The CPRD Aurum is a vast database of anonymized routine EHRs longitudinally collected as part of the free governmental health care services provided through the National Health Service (NHS) in the United Kingdom (UK). It includes around 13.3 million current patients representing \~20% of the total
+population, with about 38.4 million patients available for linkage^[@nhsdigitalCPRDAurumMarch]^.  
+
+The database includes records from
+general practices that use EMIS Web^\textregistered^ as their patient management software. The information includes an anonymous unique identification number, demographic characteristics, diagnoses and symptoms,
+drug exposures, vaccination history, laboratory tests, referrals to hospital and
+specialist care, and lifestyle factors (e.g., alcohol consumption). Full details on the database and its structure can be found elsewhere^[@wolfDataResourceProfile2019]^.
+
+Data collection from practices is subjected to their agreement to contribute patient data to the CPRD Aurum. When the practice joins the CPRD, all previously coded data is shared with the CPRD. The data is then shared on a daily basis^[@wolfDataResourceProfile2019]^. When a patient registers with a practice contributing data to the CPRD, their data is shared by default, but patients can opt-out of data sharing^[@nhsdigitalNationalDataOptout]^. Recent estimates indicate that only 5.4% of the population registered with a general practice had a national data opt-out^[@nhsdigitalMINationalData]^. The CPRD data had been found representative of the UK population in terms of
+age, sex, ethnicity, and BMI^[@bhaskaranRepresentativenessOptimalUse2013; @herrettDataResourceProfile2015]^.
+
+The database is also linked to the index of multiple deprivation, a measure of socioeconomic status in the UK^[@EnglishIndicesDeprivation]^, which links the deprivation index of the geographical area of the patient and practice to derive deprivation indices^[@herrettDataResourceProfile2015]^.  
+
+- **Hospital Episodes Statistics Admitted Patient Care (HES APC) and Office for National Statistics (ONS) databases:**
+
+HES APC is a database that contains information about
+all hospital admissions at NHS hospitals in England. Information includes patients' demographics and clinical details during hospital admissions, in addition to data about the place of care^[@herbertDataResourceProfile2017]^. Linkage to HES APC reduces the chance of under-ascertainment of study outcomes because they are usually managed at secondary care points^[@saineConcordanceHospitalizationsClinical2019;@mcdonaldPerformingStudiesUsing2018]^. 
+
+The Office for National
+Statistics (ONS) database contains information about dates and causes of
+non-hospital deaths. HES and ONS are linked on a monthly basis. Details of
+linkage can be found elsewhere^[@padmanabhanApproachRecordLinkage2019]^.
+
+
+### Data measurement
+Data measurement was conducted through routine clinical care, and data on study participants was obtained from their records in the study data sources. 
+
+## Setting 
+
+The study was restricted to patients in England because HES APC is available only for England^[@nhsdigitalHospitalEpisodeStatistics]^. At the same time, the majority of CPRD Aurum data comes from England's general practices^[@nhsdigitalCPRDAurumMarch]^. 
+
+The study period started from 01/01/2013 until 31/07/2019. Participants were followed-up from the date of their first prescription of study treatments in the study period to the earliest of first occurrence of the event of interest or censoring. Participants were censored in case of death (when not the outcome), loss-to-follow-up (leaving the practice or opting-out from data sharing), five years after the index date (maximum follow-up in ARISTOTLE), or administrative censoring at the end of the study period. 
+
+## Participants
+
+The study included adult ($\geq$ 18 years old) patients
+registered for $\geq$ 6 months in CPRD Aurum participating practices (to ensure they are incident users) and had linkage to HES APC and ONS. I included NVAF patients with first prescription of apixaban or warfarin during the study period. Diagnosis of NVAF and data on prescription were identified from the CPRD Aurum database. 
+
+Detailed eligibility criteria can be found in Table.\@ref(tab:supptable1). Participants had to have documented AF
+diagnosis, one or more stroke risk factors in CHADS~2~ (i.e., history of congestive heart failure (or left ventricular systolic dysfunction), treated hypertension, age ≥ 75 years, diabetes mellitus, stroke, transient ischemic attack, or systemic embolism. 
+
+Patients were excluded if they had a history of clinically significant mitral stenosis, increased bleeding risk that contraindicates oral anticoagulation, other conditions requiring chronic anticoagulation, persistent uncontrolled hypertension (based on two readings in the prior year), active infective endocarditis, use of aspirin >165 mg/day or simultaneous treatment of both aspirin (any dose) and clopidogrel or ticlopidine, severe comorbid condition (life expectancy ≤1 year), alcohol or drug abuse issues, stroke within seven days before the index date, severe renal insufficiency, liver enzymes abnormalities, platelet count ≤100,000/mm^3^ or hemoglobin level <9 g/dL. 
+
+Although ARISTOTLE included \~ 60\% of prior warfarin users in both treatment groups, I restricted the study population to incident users to avoid possible bias when including prevalent treatment users in observational studies^[@coxGoodResearchPractices2009; @rayEvaluatingMedicationEffects2003]^. To handle prevalent users, one would need more complex analytical methods with time-varying variables, which were unavailable in this context^[@suissaPrevalentNewuserCohort2017]^.
+
+
+## Variables
+Details of data sources, codes, and levels of all study variables in the analysis can be found in Appendix.\@ref(appendix-b). 
+
+### Exposures
+
+The study compared prescription of apixaban (2.5 mg/5 mg) to warfarin targeting an INR level of 2.0 to 3.0. Treatments were identified using the earliest treatment prescription in CPRD Aurum. I did not restrict the time from diagnosis of AF to starting study treatment since patients can be diagnosed with NVAF but do not start anticoagulants until deemed at increased risk of stroke^[@niceRecommendationsAtrialFibrillation]^.
+
+### Outcomes
+The primary outcomes in the study were time to 1) first occurrence of a composite outcome of stroke or SE and 2) first occurrence of major bleeding (defined as hemorrhagic stroke, gastrointestinal bleeding, retinal hemorrhage, respiratory bleeding and hemorrhage from other unspecified sites). 
+
+Secondary outcomes were time to the first event of the individual components of stroke/SE and time to death from any cause.
+
+Study outcomes were identified in HES APC using the International Statistical Classification of Diseases and Related Health Problems version 10 (ICD-10) clinical codes.  
+
+### Confounders
+
+To account for and understand confounding in the study, I used directed acyclic graphs (DAGs)^[@greenlandCausalDiagramsEpidemiologic1999]^ to depict my assumptions about the underlying mechanism. I created three separate DAGs since study outcomes can have different confounding paths (Figures.\@ref(fig:DAG-stroke),\@ref(fig:bleeding-DAG),\@ref(fig:mortality-DAG)). Confounders had to be independent risk factors for the
+outcome and directly affecting treatment initiation (not only through prognostic factors) without being on the causal pathway (i.e., mediators). The assumptions relied on a review of the literature, and DAGs were used for confounder selection in the statistical models. 
+
+The following variables were considered across all outcomes: Age, gender, ethnicity^[@essienAssociationRaceEthnicity2018; @essienDisparitiesAnticoagulantTherapy2021; @lipEthnicDifferencesPatient2002; @mathurEthnicityStrokeRisk2013]^, individual-level index of multiple deprivation (IMD 2015)^[@chungAtrialFibrillationEpidemiology2021;@marshallEffectsSocioeconomicStatus2015]^, practice-level IMD 2015 considering its impact on the quality of care and therefore affecting both treatment and outcomes^[@fisherrLevelNot2020; @waltonInfluencesSocioeconomicDeprivation2018;@nussbaumInequalitiesDistributionGeneral2021]^, alcohol^[@overvadAlcoholIntakePrognosis2013; @patraAlcoholConsumptionRisk2010]^, smoking^[@apostolakisFactorsAffectingQuality2013; @araiEffectCurrentSmoking2022; @bonitaCigaretteSmokingRisk1986]^, cancer^[@grisoldStrokeCancerReview2009; @leeBleedingRiskMajor2016; @naviCancerEmbolicStroke2021]^, renal function^[@bondeRenalFunctionRisk2016; @del-carpiomunozMetaAnalysisRenalFunction2016]^, liver disease^[@alonsoProspectiveStudyOral2017; @hamaguchiNonalcoholicFattyLiver2007]^ and concomitant use of low dose aspirin or clopidogrel (proxies of underlying cardiovascular diseases and affecting the type of prescribed anticoagulant).
+
+For stroke, SE, and mortality outcomes, I additionally included the remaining CHA\textsubscript{2}DS\textsubscript{2}-VASc score components since the tool can predict outcomes^[@lipRefiningClinicalRisk2010;@harbCHA2DS2VAScScoreStratifies2021]^ and it makes the basis of NICE's recommendations^[@ScenarioManagementAF]^, consequently affecting prescription practice. I also included valvular heart disease and valve surgery^[@lipAntithromboticTherapyAtrial2017; @malikOralAnticoagulantsAtrial2019;@lampreaValvularHeartDisease2021]^, concomitant use of statins because they are prescribed to people with increased cardiovascular risk and their potential drug-interaction with warfarin^[@engellDrugdrugInteractionWarfarin2021;@holbrookSystematicOverviewWarfarin2005]^, beta-blockers^[@berlowitzDifferentialAssociationsBetablockers2006]^, amiodarone, an antiarrhythmic medication^[@apostolakisFactorsAffectingQuality2013; @flakerAmiodaroneAnticoagulationClinical2014; @holbrookSystematicOverviewWarfarin2005]^, angiotensin-converting enzyme (ACE) inhibitors or angiotensin receptor blockers (ARBs)^[@hankeyAngiotensinConvertingEnzymeInhibitors2003; @healeyPreventionAtrialFibrillation2005]^, and index year (to account for changes in clinical care over the years).
+
+Additional factors for mortality were components of the Charlson comorbidity index^[@charlsonNewMethodClassifying1987;@mongkhonPatternsFactorsInfluencing2021;@rouaudComorbiditiesQualityControl2015]^. These were chronic obstructive pulmonary disease, connective tissue disease, peptic ulcer disease, hemiplegia, solid and blood tumors.
+
+For bleeding, I included components of the ORBIT Bleeding Risk Score for Atrial Fibrillation^[@obrienORBITBleedingScore2015]^ and HAS-BLED^[@pistersNovelUserfriendlyScore2010]^ Score for Major Bleeding Risk. These factors included any history of GI bleeding, intracranial bleeding, or hemorrhagic stroke, hypertension, and low hemoglobin or hematocrit. Major bleeding, low hemoglobin or hematocrit were dealt with at the design stage through restriction (section.\@ref(participants)). 
+
+
+
+### Effect modifiers
+
+I considered BMI as a *priori* effect modifier and was included in the causal graphs using suggestions by VanderWeele *et al.*(2007)^[@vanderweeleFourTypesEffect2007]^. Although obesity can impact treatment response, it is unlikely to affect the treatment prescription through other paths than one of the CHA\textsubscript{2}DS\textsubscript{2}-VASc components, which was blocked by controlling for these factors. BMI was recorded using the latest observation before study entry based on height and weight or BMI records.
+
+
+```{r DAG-stroke, echo=FALSE, fig.cap="Directed acyclic graph for stroke, systemic embolism outcomes", message=FALSE, warning=FALSE, , fig.align='center', out.width='110%',fig.pos = "h"}
+knitr::include_graphics("figures/DAG-stroke.png")
+
+```
+
+
+```{r bleeding-DAG, echo=FALSE, fig.cap="Directed acyclic graph for major bleeding", message=FALSE, warning=FALSE, , fig.align='center', out.width='110%',fig.pos = "h"}
+knitr::include_graphics("figures/bleeding-DAG.png")
+
+```
+
+```{r mortality-DAG, echo=FALSE, fig.cap="Directed acyclic graph for mortality", message=FALSE, warning=FALSE, , fig.align='center', out.width='110%',fig.pos = "h"}
+knitr::include_graphics("figures/Mortality-DAG.png")
+
+```
+
+## Bias
+
+Multiple sources can bias the estimates in this study. First, immortal time bias (arising when the time under observation in compared groups is misclassified) ^[@suissaTimerelatedBiasesPharmacoepidemiology2020]^.To avoid it, I used a target trial design and specified the time zero of the study to be at the date of the first prescription for both treatments^[@hernanSpecifyingTargetTrial2016]^. 
+
+Second, selection bias arising from differential loss-to-follow-up or missing data bias. The first can hardly be expected in EHR data from routine primary care settings, while handling of missing data is described in section.\@ref(missing-data).   
+
+Third, information bias can arise due to measurement error for BMI if the recorded data is old and does not reflect the BMI at the treatment prescription. To investigate the impact of this, I performed a sensitivity analysis restricted to patients with BMI data in the three years prior to the index date, as suggested by Bhaskaran *et al.*(2013)^[@bhaskaranRepresentativenessOptimalUse2013]^. 
+
+
+## Data management  
+
+PhD student and owner of the data Emma Powell provided me with 1) an apixaban and 2) a warfarin datasets of patients eligible for ARISTOTLE; 3) separate datasets for each outcome in the study (restricted to relevant codes) and 4) a separate dataset for raw BMI measurements. All data management steps done by me are illustrated in Figure.\@ref(fig:datamangment)
+
+
+
+```{r datamangment, echo=FALSE, fig.cap="Data management workflow", message=FALSE, warning=FALSE, , fig.align='center', out.width='100%',fig.pos = "h"}
+knitr::include_graphics("figures/data_mange2.png")
+
+```
+
+
+
+## Study size
+
+The ARISTOTLE trial gave the basis for the sample size calculation^[@grangerApixabanWarfarinPatients2011]^. In the trial, 
+apixaban was required to preserve at least 50% of the warfarin effect on stroke or systemic embolism, which was 62% based on multiple randomized trials to achieve the non-inferiority hypothesis. They estimated that 448 primary events would result in 90% power that the upper limit of the 95% CI for the relative risk would be less than 1.38. This resulted in recruiting 18,000 patients to reach the number of events within two years.
+
+Since I am interested in the average treatment effects within BMI strata, I assumed that at least 448 primary outcomes occurring in each stratum during the study follow-up would provide sufficient power for the data to detect non-inferiority of stroke/SE. The effects of BMI on the event rate of the primary outcome are estimated to be around 1.13%, 1.44%, and 3% in the obese, overweight and healthy weight BMI categories which might affect the number of patients needed to reach the events^[@hohnloserEfficacySafetyApixaban2019]^.
+
+
+## Quantitative variables
+
+The quantitative variables were age, systolic blood pressure, weight, and BMI.
+
+Age (years) was reported as continuous variable and was also categorized into 18-49, 50-59, 60-69, 70-74, ≥75. Unequal intervals were used since the disease is uncommon in younger ages and being more than 75 years constitutes a major reason for initiating anticoagulant treatment.
+
+Systolic blood pressure, and weight were reported as continuous variables. 
+
+BMI (kg/m^2^) was reported as continuous variable and categorized based on NICE's classification^[@niceIdentificationClassificationDiagnosis]^: 
+
++ Underweight: less than 18.5 
++ Healthy weight: 18.5-24.9 
++ Overweight: 25-29.9 
++ Obesity class I: 30-34.9 
++ Obesity class II: 35-39.9 
++ Obesity class III: ≥ 40 
+
+However, based on the initial estimates of total participants in each BMI group across treatment groups, I regrouped the variable in the analysis to the following categories to avoid data sparsity:  
+
++ Healthy weight: ≤ 24.9 
++ Overweight: 25-29.9 
++ Obese: ≥ 30  
+
+## Statistical methods
+
+### Analysis populations 
+
+ARISTOTLE used an intention-to-treat (ITT) approach as primary analysis population for efficacy outcomes and a primary safety population (patients receiving at least one dose of study treatment) for safety outcomes^[@grangerApixabanWarfarinPatients2011]^. 
+
+I replicated these analyses using the following criteria: 
+
+1) An observational-analogous of the ITT population was obtained by assigning participants to the first prescribed treatment during the study period regardless of treatment switching and censoring as stated previously. 
+
+2) The safety-set analog was also obtained by assigning individuals to the first received treatment but did additionally censored patients 30 days after the last prescription date of the treatment (to account for stockpiling) or when switching to another anticoagulant.
+
+
+### Descriptive statistics 
+
+Baseline characteristics were tabulated by treatment arms. For numerical variables, I used means (standard deviations) or medians (interquartile range (IQR)), when there is evidence of data skewness. Categorical data were tabulated and summarized using counts and percentages. The number of missing data for each baseline variable were reported.
+
+
+### Statistical models
+
+I used a multivariable Cox regression model to analyze study outcomes using age as the time scale with Efron approximation^[@coxRegressionModelsLifeTables1972 ;@thiebautChoiceTimescaleCox2004;@cologneProportionalHazardsRegression2012;@hertz-picciottoValidityEfficiencyApproximation1997]^.
+
+Covariates in the model included treatments, confounders, BMI groups, and an interaction term between treatment and BMI groups. P-values for interaction were obtained by comparing two cox models, one with and one without interaction terms, using likelihood ratio tests (LRT). Stratum-specific P-values were obtained directly from the interaction model using the Wald test. Multicollinearity was checked by comparing standard errors of treatments in the minimally adjusted (age as time scale) and fully adjusted (additionally adjusted for confounders in DAGs) models.
+
+In addition to using age as a time scale, the final model adjusted for: 
+
+- Stroke/SE and their individual components: gender, alcohol, smoking, ethnicity, history of congestive heart failure (or left ventricular systolic dysfunction), treated hypertension through medication, diabetes mellitus, stroke, TIA, or systemic embolism, CHADS~2~ score, peripheral artery disease, aortic plaque, history of myocardial infarction, renal function, liver disease, individual-level and practice-level multiple deprivation indices, solid cancers, hematological cancers, valvular diseases and valve surgery, calendar year, concomitant use of aspirin, amiodarone, beta-blockers, clopidogrel, statins, and ACE inhibitors or ARBs in normotensive patients. 
+
+- Mortality: additionally adjusted for chronic obstructive disease, connective tissue diseases, peptic ulcer, and hemiplegia.
+
+- Major bleeding: gender, alcohol, smoking, ethnicity, treated hypertension through medication, renal function, liver disease, stroke, TIA, or systemic embolism, individual-level and practice-level multiple deprivation indices, solid cancer, hematological cancers, valvular diseases and valve surgery calendar year, concomitant use of aspirin, clopidogrel, non-steroidal anti-inflammatory drugs.
+
+I presented BMI-stratum-specific, minimally adjusted and fully adjusted hazard ratios, 95% confidence intervals, P-values from Wald test for each stratum, and interaction P-values using LRTs.
+
+Proportional hazard (PH) assumption were examined by: 
+1) Using Nelson–Aalen estimator plots for the effects of treatments on outcomes over time. 
+2) Examining the interaction of time (split to three periods with similar number of events for each outcome) with treatment by fitting two cox models, one with and one without an interaction term between time period and treatment, and comparing the two models using LRTs. 
+
+
+I declared non-inferiority for stroke/SE outcomes when the upper limit of the 95% CI of the hazard ratio is <1.38^[@foodanddrugadministrationfdaNonInferiorityClinicalTrials]^. 
+
+I did not present the overall results for two reasons 1) this research aims to estimate the average treatment effect among subgroups, and 2) the overall results are the focus of current ongoing work by Powell *et al.*(2021)^[@powellRealworldEffectsMedications2021;@powelleCanWeReplicate]^. I did not use Kaplan-Meier graphs as in ARISTOTLE because conventional methods does not account for confounding and the interpretation of confounded graphs were not be useful. 
+
+
+### Missing data 
+I used a complete-case analysis which was also strengthened by the fact that missing data for the important variables in the study are likely missing not at random^[@bhaskaranWhatDifferenceMissing2014]^.
+
+### Sensitivity analyses 
+
+1) I performed an analysis for all study outcomes while restricting BMI measurements to ≤3 years before the index date based on Bhaskaran *et al.*(2013)^[@bhaskaranRepresentativenessOptimalUse2013]^. 
+
+2) For primary study outcomes, I explored the interaction of BMI as a linear term (i.e., continuous scale) with treatments using LRTs. 
+
+3) For primary study outcomes, I repeated the analysis using the NICE's classification of BMI as illustrated in section.\@ref(quantitative-variables). 
+
+- All sensitivity analyses were done using the fully adjusted models. 
+
+### Post-hoc analyses for primary study outcomes
+
+1) I calculated the ratio of hazard ratios with a corresponding 95% CIs and p-values using normal weight as reference group for overweight and obese groups to further assess the multiplicative effect modification^[@knolRecommendationsPresentingAnalyses2012]^. 
+
+2) I conducted quantitative bias analysis using E values to understand how an unmeasured confounder would change study estimates towards the null or towards ARISTOTLE results for stroke/SE or derive the effect modification to a non-null estimate^[@vanderweeleSensitivityAnalysisObservational2017;@mathurEvaluesEffectHeterogeneity2022]^.
+
+3) I derived propensity scores and use them as a single covariate or an additional covariate to the fully adjusted model. 
+
